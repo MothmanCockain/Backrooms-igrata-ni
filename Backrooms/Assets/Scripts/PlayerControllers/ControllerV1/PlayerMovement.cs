@@ -3,7 +3,6 @@ using UnityEngine;
 
 // By B0N3head 
 // All yours, use this script however you see fit, feel free to give credit if you want
-[AddComponentMenu("Player Movement and Camera Controller")]
 public class PlayerMovement : NetworkBehaviour
 {
     

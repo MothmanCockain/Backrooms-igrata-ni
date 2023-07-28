@@ -1,27 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class InventoryHandler : MonoBehaviour
 {
     public GameObject inventoryUI;  // Attach your inventory panel in the Unity inspector.
-
+    private bool inventoryOpened = false;
+    public Component characterController;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        
+        if (inventoryOpened == false && Input.GetKeyDown(KeyCode.I))
         {
             Debug.Log("InventoryOpen");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             inventoryUI.SetActive(true);
+            inventoryOpened = true;
+            characterController.GetComponent<PlayerMovement>().enabled = false;
+            
         }
         else
-        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
+        if (inventoryOpened == true && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I)))
         {
             Debug.Log("InventoryClosed");
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             inventoryUI.SetActive(false);
+            inventoryOpened = false;
+            characterController.GetComponent<PlayerMovement>().enabled = true;
         }
     }
 
